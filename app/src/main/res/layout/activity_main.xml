@@ -25,4 +25,12 @@
         android:layout_height="wrap_content"
         android:background="#dd2c4eca"
         android:text="Launch Servicie"/>
+
+    <Button
+        android:id="@+id/activity_main___stop_service"
+        android:layout_below="@id/activity_main___launch_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ddca2c53"
+        android:text="Pára por Dioh"/>
 </RelativeLayout>
