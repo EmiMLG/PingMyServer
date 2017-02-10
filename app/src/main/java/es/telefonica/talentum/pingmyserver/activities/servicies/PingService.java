@@ -2,14 +2,17 @@ package es.telefonica.talentum.pingmyserver.activities.servicies;
 
 import android.app.AlarmManager;
 import android.app.IntentService;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 
 import es.telefonica.talentum.pingmyserver.activities.MainActivity;
 import es.telefonica.talentum.pingmyserver.util.Temblator;
@@ -37,22 +40,35 @@ public class PingService extends IntentService { //TODO 1: Todos los servicios e
         Log.d("PingService", "------------ Hello World ----------" + s);
         Temblator.tremble(this, 500);
 
-        SystemClock.sleep(3000);
+        pingServer();
+
         Log.d("PingService", "Tarea finalizada");
 
-        Intent i = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this,76,i,0);
-        Notification notification = new NotificationCompat.Builder(this).
-                setContentTitle("Hola, Hola")
-                .setContentText("Este es mi texto")
-                .setSmallIcon(android.R.drawable.ic_menu_call)
-                .setAutoCancel(true)
-                .setColor(0xFF00FF00)
-                .setContentIntent(pendingIntent)
-                .build();
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(23423423, notification);
+    }
+
+    private void pingServer() {
+        Socket socket;
+        final String host = "82.98.136.90"; //coreta.com
+        final int port = 80;
+        final int timeout = 30000;   // 30 seconds
+        try {
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(host, port), timeout);
+            Notifications.postNotification(this, MainActivity.class, "Cocreta viva", "Esto es el texto", android.R.drawable.ic_menu_call, 0xFF00FF00);
+
+        }
+        catch (UnknownHostException uhe) {
+            Log.e("ServerSock", "I couldn't resolve the host you've provided!");
+        }
+        catch (SocketTimeoutException ste) {
+            Log.e("ServerSock", "After a reasonable amount of time, I'm not able to connect, Server is probably down!");
+        }
+        catch (IOException ioe) {
+            Log.e("ServerSock", "Hmmm... Sudden disconnection, probably you should start again!");
+            Notifications.postNotification(this, MainActivity.class, "Cocreta muerta", "Sin Conexion", android.R.drawable.ic_delete, 0xFF00FF00);
+
+        }
     }
 
 

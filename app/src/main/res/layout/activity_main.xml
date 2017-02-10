@@ -4,6 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#c3929adf"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -21,16 +22,17 @@
     <Button
         android:id="@+id/activity_main___launch_button"
         android:layout_below="@id/activity_main___edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
         android:background="#dd2c4eca"
         android:text="Launch Servicie"/>
 
     <Button
         android:id="@+id/activity_main___stop_service"
-        android:layout_below="@id/activity_main___launch_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/activity_main___launch_button"
+        android:layout_below="@id/activity_main___edit_text"
         android:background="#ddca2c53"
-        android:text="Pára por Dioh"/>
+        android:text="Pára por Diohºº"/>
 </RelativeLayout>
