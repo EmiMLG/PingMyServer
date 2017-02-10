@@ -10,8 +10,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="es.telefonica.talentum.pingmyserver.activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/activity_main___edit_text"
+        android:layout_width="match_parent"
+        android:hint="Escribe algo por aquí"
+        android:layout_height="200dp"
+        />
+
+
+    <Button
+        android:id="@+id/activity_main___launch_button"
+        android:layout_below="@id/activity_main___edit_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:background="#dd2c4eca"
+        android:text="Launch Servicie"/>
 </RelativeLayout>
